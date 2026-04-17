@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外研三起点英语 - 基于杨萃先老师教学理念</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 登录/注册页面 -->
+    <div id="auth-page" class="page active">
+        <div class="auth-container">
+            <h1>魔法英语</h1>
+            <p>外研三起点英语新课标</p>
+            
+            <div class="auth-tabs">
+                <button id="login-tab" class="active">登录</button>
+                <button id="register-tab">注册</button>
+            </div>
+            
+            <div id="login-form" class="form active">
+                <input type="text" placeholder="用户名" id="login-username">
+                <input type="password" placeholder="密码" id="login-password">
+                <button id="login-btn">登录</button>
+                <div class="form-footer">
+                    <a href="#" id="forgot-password-link">找回密码</a>
+                </div>
+            </div>
+            
+            <div id="forgot-password-form" class="form">
+                <h3>找回密码</h3>
+                <input type="text" placeholder="用户名" id="forgot-username">
+                <input type="text" placeholder="新密码" id="forgot-new-password">
+                <input type="text" placeholder="确认新密码" id="forgot-confirm-password">
+                <button id="forgot-password-btn">重置密码</button>
+                <div class="form-footer">
+                    <a href="#" id="back-to-login-link">返回登录</a>
+                </div>
+            </div>
+            
+            <div id="register-form" class="form">
+                <input type="text" placeholder="用户名" id="register-username">
+                <input type="password" placeholder="密码" id="register-password">
+                <input type="password" placeholder="确认密码" id="register-confirm-password">
+                <button id="register-btn">注册</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 主学习页面 -->
+        <div id="main-page" class="page">
+            <header>
+                <h1>魔法英语 - 外研三起点</h1>
+                <div class="user-info">
+                    <span id="username">用户</span>
+                    <button id="logout-btn">退出</button>
+                </div>
+            </header>
+            
+            <!-- 左侧动态提示框 -->
+            <div id="floating-card-progress" class="floating-card-progress">
+                <span id="card-progress-text">还差 5 题获得卡牌</span>
+            </div>
+            
+            <!-- 右侧学习时间和复习提示 -->
+            <div id="learning-stats" class="learning-stats">
+                <div class="stat-item">
+                    <h3>学习时间</h3>
+                    <p id="learning-time">00:00</p>
+                </div>
+                <div class="stat-item">
+                    <h3>复习提示</h3>
+                    <button id="end-learning-btn" class="end-learning-btn">结束本次学习</button>
+                    <p id="review-info">下次复习时间: 无</p>
+                    <p id="review-count">需要复习: 0 个单词</p>
+                    <div id="detailed-review-times" class="detailed-review-times" style="display: none;">
+                        <h4>详细复习时间</h4>
+                        <p>简单: <span id="easy-review-time">无</span></p>
+                        <p>一般: <span id="normal-review-time">无</span></p>
+                        <p>中等: <span id="medium-review-time">无</span></p>
+                        <p>困难: <span id="hard-review-time">无</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav>
+                <button id="learn-btn" class="nav-btn active">学习</button>
+                <button id="review-btn" class="nav-btn">复习</button>
+                <button id="cards-btn" class="nav-btn">卡牌</button>
+                <button id="wordlib-btn" class="nav-btn">单词库</button>
+                <button id="stats-btn" class="nav-btn">统计</button>
+            </nav>
+            
+            <main>
+                <!-- 学习设置页面 -->
+                <div id="learn-setup-section" class="section active">
+                    <div class="setup-container">
+                        <h2>学习设置</h2>
+                        
+                        <div class="setup-item">
+                            <h3>选择关卡</h3>
+                            <div class="level-buttons setup-buttons">
+                                <button class="setup-btn level-btn" data-level="1">第1关</button>
+                                <button class="setup-btn level-btn" data-level="2">第2关</button>
+                                <button class="setup-btn level-btn" data-level="3">第3关</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setup-item">
+                            <h3>每次记忆单词数</h3>
+                            <div class="word-count-buttons setup-buttons">
+                                <button class="setup-btn word-count-btn" data-count="1">1个</button>
+                                <button class="setup-btn word-count-btn" data-count="5">5个</button>
+                                <button class="setup-btn word-count-btn" data-count="10">10个</button>
+                                <button class="setup-btn word-count-btn" data-count="20">20个</button>
+                                <button class="setup-btn word-count-btn" data-count="30">30个</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setup-item">
+                            <h3>背单词模式</h3>
+                            <div class="mode-buttons setup-buttons">
+                                <button class="setup-btn mode-btn active" data-mode="normal">普通模式</button>
+                                <button class="setup-btn mode-btn" data-mode="5330">5/3/30模式</button>
+                            </div>
+                        </div>
+                        
+                        <button id="start-learning-btn" class="start-btn">开始学习</button>
+                    </div>
+                </div>
+                
+                <!-- 5/3/30背单词模式页面 -->
+                <div id="5330-section" class="section">
+                    <div class="5330-container">
+                        <h2>5/3/30 背单词大法</h2>
+                        
+                        <div class="5330-steps">
+                            <div class="step">
+                                <h3>第一步：5分钟学习</h3>
+                                <p>遮住中文，只看英文，主动检索含义</p>
+                                <div class="timer" id="step1-timer">5:00</div>
+                                <button id="start-step1" class="step-btn">开始</button>
+                            </div>
+                            
+                            <div class="step">
+                                <h3>第二步：3分钟复习</h3>
+                                <p>检索式快速复习</p>
+                                <div class="timer" id="step2-timer">3:00</div>
+                                <button id="start-step2" class="step-btn" disabled>开始</button>
+                            </div>
+                            
+                            <div class="step">
+                                <h3>第三步：30分钟番茄钟</h3>
+                                <p>分3组（5+3），最后总复习，每组单词重复3遍</p>
+                                <div class="timer" id="step3-timer">30:00</div>
+                                <button id="start-step3" class="step-btn" disabled>开始</button>
+                            </div>
+                        </div>
+                        
+                        <div class="5330-words" id="5330-words">
+                            <!-- 单词将在这里显示 -->
+                        </div>
+                        
+                        <button id="back-to-setup" class="back-btn">返回设置</button>
+                    </div>
+                </div>
+                
+                <!-- 学习页面 -->
+                <div id="learn-section" class="section">
+                    <div class="level-info">
+                        <div class="level-selector">
+                            <h2>关卡选择</h2>
+                            <div class="level-buttons">
+                                <button class="level-btn" data-level="1">第1关</button>
+                                <button class="level-btn" data-level="2">第2关</button>
+                                <button class="level-btn" data-level="3">第3关</button>
+                            </div>
+                            <h3>三年级下册 - 第<span id="current-level">1</span>关</h3>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%"></div>
+                        </div>
+                        <p>进度: <span id="progress-text">0/20</span></p>
+                        <div class="memory-speed-info">
+                            <p id="memory-speed">记忆速度: 分析中...</p>
+                            <p id="daily-recommendation">每日推荐: 1 关卡</p>
+                        </div>
+                    </div>
+                
+                <div class="word-card">
+                    <div class="word" id="current-word">apple</div>
+                    <div class="phonetic" id="current-phonetic">[ˈæpl]</div>
+                    <div class="spelling" id="current-spelling">a-pp-le</div>
+                    <div class="meaning" id="current-meaning">苹果</div>
+                    <div class="example" id="current-example">I eat an apple every day.</div>
+                    <button id="pronunciation-btn" class="pronunciation-btn">🔊</button>
+                    <div class="speaking-section">
+                        <h3>发音练习</h3>
+                        <button id="record-btn" class="record-btn">🎤 开始录音</button>
+                        <div id="recording-status" class="recording-status"></div>
+                        <div id="pronunciation-score" class="pronunciation-score"></div>
+                    </div>
+                </div>
+                
+                <div class="feiman-output-section">
+                    <h3>📝 费曼输出</h3>
+                    <div class="feiman-tabs">
+                        <button class="feiman-tab active" data-tab="sentence">造句</button>
+                        <button class="feiman-tab" data-tab="usage">说用法</button>
+                    </div>
+                    <div class="feiman-content">
+                        <div class="feiman-panel active" id="sentence-panel">
+                            <p>用这个单词造一个句子：</p>
+                            <textarea id="sentence-input" placeholder="例如：I like eating apples." rows="3"></textarea>
+                            <button id="submit-sentence" class="submit-btn">提交句子</button>
+                            <div id="sentence-feedback" class="feedback"></div>
+                        </div>
+                        <div class="feiman-panel" id="usage-panel">
+                            <p>说说这个单词的用法：</p>
+                            <textarea id="usage-input" placeholder="例如：apple是可数名词，可以用an apple或apples。" rows="3"></textarea>
+                            <button id="submit-usage" class="submit-btn">提交用法</button>
+                            <div id="usage-feedback" class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-section">
+                    <h3>练习</h3>
+                    <div id="practice-content">
+                        <!-- 练习内容将在这里生成 -->
+                    </div>
+                </div>
+                
+                <div class="feedback-buttons">
+                    <button class="feedback-btn hard">困难</button>
+                    <button class="feedback-btn medium">一般</button>
+                    <button class="feedback-btn easy">简单</button>
+                    <button id="next-btn" class="feedback-btn next">下一步</button>
+                </div>
+            </div>
+            
+            <!-- 复习页面 -->
+            <div id="review-section" class="section">
+                <h2>今日复习</h2>
+                <div id="review-list">
+                    <!-- 复习单词列表将在这里生成 -->
+                </div>
+            </div>
+            
+            <!-- 卡牌页面 -->
+            <div id="cards-section" class="section">
+                <h2>我的卡牌</h2>
+                <div class="cards-container">
+                    <!-- 卡牌将在这里生成 -->
+                </div>
+                <div class="redeem-section">
+                    <h3>兑换礼物</h3>
+                    <div class="redeem-info">
+                        <p>你有 <span id="card-count">0</span> 张卡牌</p>
+                        <p>每张卡牌可以兑换一个实体礼物</p>
+                    </div>
+                    <div class="redeem-form">
+                        <input type="text" placeholder="输入父母密码" id="redeem-code">
+                        <button id="redeem-btn">兑换</button>
+                    </div>
+                    <div id="redeem-message" class="redeem-message"></div>
+                </div>
+                <div class="parent-section">
+                    <h3>父母设置</h3>
+                    <div class="parent-form">
+                        <input type="password" placeholder="设置父母密码" id="parent-password">
+                        <input type="password" placeholder="确认父母密码" id="confirm-parent-password">
+                        <button id="set-parent-password-btn">设置密码</button>
+                    </div>
+                    <div id="parent-message" class="parent-message"></div>
+                </div>
+                <div class="redeem-history-section">
+                    <h3>兑换历史</h3>
+                    <div id="redeem-history-list" class="redeem-history-list">
+                        <!-- 兑换历史将在这里生成 -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 统计页面 -->
+            <div id="stats-section" class="section">
+                <h2>学习统计</h2>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-value">0</span>
+                        <span class="stat-label">总学习单词</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">0</span>
+                        <span class="stat-label">今日学习</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">0%</span>
+                        <span class="stat-label">掌握率</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">0</span>
+                        <span class="stat-label">获得卡牌</span>
+                    </div>
+                </div>
+                <div class="level-progress">
+                    <h3>关卡进度</h3>
+                    <div class="level-list">
+                        <!-- 关卡进度将在这里生成 -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 单词库管理页面 -->
+            <div id="wordlib-section" class="section">
+                <h2>单词库管理</h2>
+                <div class="wordlib-container">
+                    <!-- 单词库选择 -->
+                    <div class="wordlib-section">
+                        <h3>选择单词库</h3>
+                        <div id="wordlib-list" class="wordlib-list">
+                            <!-- 单词库列表将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 自定义单词库 -->
+                    <div class="wordlib-section">
+                        <h3>创建自定义单词库</h3>
+                        <div class="custom-wordlib-form">
+                            <input type="text" id="wordlib-name" placeholder="输入单词库名称">
+                            <button id="create-wordlib-btn" class="btn">创建</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 拍照识别单词 -->
+                    <div class="wordlib-section">
+                        <h3>拍照识别单词</h3>
+                        <div class="camera-section">
+                            <video id="camera-preview" class="camera-preview"></video>
+                            <canvas id="camera-canvas" class="camera-canvas" style="display: none;"></canvas>
+                            <div class="camera-controls">
+                                <button id="start-camera-btn" class="btn">开启摄像头</button>
+                                <button id="capture-btn" class="btn" disabled>拍照</button>
+                                <button id="add-word-btn" class="btn" disabled>添加单词</button>
+                            </div>
+                            <div id="recognition-result" class="recognition-result"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- 奖励弹窗 -->
+        <div id="reward-modal" class="modal">
+            <div class="modal-content">
+                <h2>恭喜！</h2>
+                <p>你完成了第<span id="reward-level">1</span>关</p>
+                <div class="reward-item">
+                    <h3>获得魔法道具</h3>
+                    <div id="reward-prop" class="prop">🌟 魔法星星</div>
+                </div>
+                <div class="reward-item">
+                    <h3>获得卡牌</h3>
+                    <div id="reward-card" class="card">🔥 火焰卡牌</div>
+                </div>
+                <button id="reward-close">确定</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
